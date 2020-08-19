@@ -1,0 +1,13 @@
+<div>
+  <div class="col">
+    <div class="productoTienda">
+    <img [src]="imageToShow" alt="" class="img">
+    <h6>Nombre: {{product.prd_nom}} </h6>
+    <h6>Precio: {{product.prd_precio}} </h6>
+    <button >
+        <!-- <h6><button [routerLink]="['/productos',product.prd_id]" class="btn btn-sm btn-info" ></button>  </h6> -->
+      <h6> <a class="agregarBotton" [routerLink]="['/productoencarrito/add',product.prd_id]" >Agregar al carrito</a></h6>
+    </button>
+    </div>
+  </div>
+</div>

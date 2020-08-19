@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiPortBelly", "WebApiPortBelly\WebApiPortBelly.csproj", "{0313C6F5-90CC-4922-859A-15D62BCE52FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEUCrtProyectoLuis", "..\BEUCrtProyectoLuis\BEUCrtProyectoLuis.csproj", "{A47ABE6E-3A8E-4461-A5E8-986C696F2DD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0313C6F5-90CC-4922-859A-15D62BCE52FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0313C6F5-90CC-4922-859A-15D62BCE52FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0313C6F5-90CC-4922-859A-15D62BCE52FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0313C6F5-90CC-4922-859A-15D62BCE52FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47ABE6E-3A8E-4461-A5E8-986C696F2DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47ABE6E-3A8E-4461-A5E8-986C696F2DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47ABE6E-3A8E-4461-A5E8-986C696F2DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47ABE6E-3A8E-4461-A5E8-986C696F2DD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7755267-4752-4746-A376-78D3C39F2A81}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-sm">
+        <a class="nav-link " routerLink="/productos">
+            <fa-icon [icon]="faList"></fa-icon> Productos
+        </a>
+    </div>
+    <div class="col-sm">
+        <fa-icon class="fa-2x" [icon]="faCartPlus"></fa-icon>
+    </div>
+</div>
+<hr>
+<form [formGroup]="formProduct" (ngSubmit)="onSubmit()" class="user" enctype="multipart/form-data" #imageForm=ngForm>
+    <div class="card-body">
+        <div class="row row-cols-2">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <img [src]="imageUrl" style="width: 350px; height:300px">
+            </span>
+                    </div>
+                    <input formControlName="prd_img" type="file" (change)="handleFileInput($event.target.files)" class="form-control-file" placeholder="Imagen" #Image accept="image/*" required />
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                  <fa-icon [icon]="faPager"></fa-icon>
+                </span>
+                            </div>
+                            <select formControlName="cat_id" [(ngModel)]="product.cat_id" class="form-control" required>
+                <option *ngFor="let item of categorias" [value]="item.cat_id">{{item.cat_nom}}</option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                  <fa-icon [icon]="faTag"></fa-icon>
+                </span>
+                            </div>
+                            <select formControlName="prm_id" class="form-control" [(ngModel)]="product.prm_id" required>
+                <option *ngFor="let item of promocion" [value]="item.prm_id">{{item.prm_nom}}</option>
+              </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <fa-icon [icon]="faPager"></fa-icon>
+            </span>
+                    </div>
+                    <input formControlName="prd_nom" type="text" class="form-control " [(ngModel)]="product.prd_nom" placeholder="Nombre" required />
+                </div>
+                <label for="talla">Talla</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <fa-icon [icon]="faRuler"></fa-icon>
+            </span>
+                    </div>
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="talla">Seleccionar Talla</label> -->
+                    <select formControlName="prd_tal" type="text" class="form-control form-control-user" id="exampleFormControlSelect1" [(ngModel)]="product.prd_tal" placeholder="Talla" required>
+            <option>XL</option>
+            <option>L</option>
+            <option>M</option>
+            <option>S</option>
+            <option>XS</option>
+          </select>
+                    <!-- </div> -->
+                    <!-- <input formControlName="prd_tal" type="text" class="form-control form-control-user"
+            [(ngModel)]="product.prd_tal" placeholder="Talla" /> -->
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <fa-icon [icon]="faTag"></fa-icon>
+            </span>
+                    </div>
+                    <textarea formControlName="prd_crt" type="text" class="form-control form-control-user" [(ngModel)]="product.prd_crt" placeholder="Caracteristicas" required></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <fa-icon [icon]="faGripVertical"></fa-icon>
+            </span>
+                    </div>
+                    <input formControlName="prd_cnt" type="number" min="1" max="100000" class="form-control form-control-user" [(ngModel)]="product.prd_cnt" placeholder="Cantidad" required />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+              <fa-icon [icon]="faDollarSign"></fa-icon>
+            </span>
+                    </div>
+                    <input formControlName="prd_prc" type="number" min="0.01" max="100000" step="0.01" class="form-control form-control-user" [(ngModel)]="product.prd_precio" placeholder="precio" required />
+                </div>
+                <div class="btn-group text-center">
+                    <button type="submit" [disabled]="Image.value=='' || !formProduct.valid  " class="btn btn-success">
+            <fa-icon [icon]="faSave"></fa-icon>&nbsp;Guardar
+          </button>
+                    <button type="reset" (click)="onReset()" class="btn btn-danger">
+            <fa-icon [icon]="faTimes"></fa-icon>&nbsp;Cancelar
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
