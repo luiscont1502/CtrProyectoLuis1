@@ -35,6 +35,9 @@ import { ProductInCartAddComponent } from './product-in-cart-main/product-in-car
 import { ProductInCartCreateComponent } from './product-in-cart-main/product-in-cart-create/product-in-cart-create.component';
 import { ProductInCartListComponent } from './product-in-cart-main/product-in-cart-list/product-in-cart-list.component';
 import { UsersCreateComponent } from './users-main/users-create/users-create.component';
+import { ContactanosMainComponent } from './contactanos-main/contactanos-main.component';
+//google maps de angular
+import { GoogleMapsModule} from '@angular/google-maps';
 
 
 @NgModule({
@@ -60,6 +63,7 @@ import { UsersCreateComponent } from './users-main/users-create/users-create.com
     ProductInCartCreateComponent,
     ProductInCartListComponent,
     UsersCreateComponent,
+    ContactanosMainComponent,
 
   ],
   imports: [
@@ -70,6 +74,7 @@ import { UsersCreateComponent } from './users-main/users-create/users-create.com
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    GoogleMapsModule
   ],
   providers: [
     ProductService, {

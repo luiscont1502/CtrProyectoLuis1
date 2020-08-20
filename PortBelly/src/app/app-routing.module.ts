@@ -9,6 +9,7 @@ import { PromotionMainComponent } from './promotion-main/promotion-main.componen
 import { ProductInCartAddComponent } from './product-in-cart-main/product-in-cart-add/product-in-cart-add.component';
 import { ProductInCartListComponent } from './product-in-cart-main/product-in-cart-list/product-in-cart-list.component';
 import { UsersCreateComponent } from './users-main/users-create/users-create.component';
+import { ContactanosMainComponent } from './contactanos-main/contactanos-main.component';
 const routes: Routes = [
   {path: '',redirectTo:'/',pathMatch:'full'},
   {path:'tienda', component:ProductsMarketComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
 {path: 'promociones', component: PromotionMainComponent},
 {path: 'productoencarrito/add/:id', component: ProductInCartAddComponent},
 {path: 'carritopersonal', component: ProductInCartListComponent},
-{path: 'usuario',component:UsersCreateComponent}
+{path: 'usuario',component:UsersCreateComponent},
+{path: 'contactos',component:ContactanosMainComponent}
 
 
 ];
