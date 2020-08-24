@@ -38,7 +38,10 @@ import { UsersCreateComponent } from './users-main/users-create/users-create.com
 import { ContactanosMainComponent } from './contactanos-main/contactanos-main.component';
 //google maps de angular
 import { GoogleMapsModule} from '@angular/google-maps';
-
+//message
+import { MessageService } from './services/message.service';
+import { InicioComponent } from './inicio/inicio.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { GoogleMapsModule} from '@angular/google-maps';
     ProductInCartListComponent,
     UsersCreateComponent,
     ContactanosMainComponent,
+    InicioComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -81,7 +86,7 @@ import { GoogleMapsModule} from '@angular/google-maps';
       provide: HTTP_INTERCEPTORS,
       useClass: ServiceInterceptor,
       multi: true
-    },
+    },MessageService,
     {
       provide: LOCALE_ID,
       useValue : 'es-EC'

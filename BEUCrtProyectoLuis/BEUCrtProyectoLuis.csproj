@@ -100,6 +100,8 @@
     <Compile Include="Queris\CarritoBLL.cs" />
     <Compile Include="Queris\CategoriaBLL.cs" />
     <Compile Include="Queris\ClienteBLL.cs" />
+    <Compile Include="Queris\Correos.cs" />
+    <Compile Include="Queris\CorreoBLL.cs" />
     <Compile Include="Queris\CuerpoFacturaBLL.cs" />
     <Compile Include="Queris\PagoBLL.cs" />
     <Compile Include="Queris\ProductoBLL.cs" />
