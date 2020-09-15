@@ -1,0 +1,92 @@
+<section>
+
+  <div class="row">
+    <div class="col-sm">
+      <a class="nav-link " routerLink="/productos">
+        <fa-icon [icon]="faIdCard"></fa-icon> Productos
+      </a>
+    </div>
+    <div class="col-sm">
+      <fa-icon class="fa-2x" [icon]="faPlus"></fa-icon>
+    </div>
+  </div>
+  <hr>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="user" enctype="multipart/form-data" #imageForm=ngForm>
+    <div class="card-body">
+      <div class="row row-cols-2">
+        <div class="col">
+          <div class="input-group  creditcart">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <img src="assets/img/Creditcart.jpg" class="img-fluid mt-5"
+                  style="right: 0; top: 0;  opacity: 1; width: auto; height: 50vh;">
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="disabledTextInput">Numero de tarjeta</label>
+            <input type="text" formControlName="pgo_ntg" name="pgo_ntg" id="disabledTextInput" class="form-control" [(ngModel)]="payment.pgo_ntg"
+            placeholder="0000 0000 0000 0000" minlength="16" maxlength="16"  pattern="^[0-9]*$" (keypress)="numberOnly($event)" required >
+
+            <div *ngIf="form.get('pgo_ntg').errors && form.get('pgo_ntg').dirty">
+              <p *ngIf="form.get('pgo_ntg').hasError('required')">Field is required</p>
+              <p *ngIf="form.get('pgo_ntg').hasError('minlength')">Min of 16 characters</p>
+              <p *ngIf="form.get('pgo_ntg').hasError('maxlength')">Max of 16 characters</p>
+            </div>
+<!--
+   <input formControlName="pcr_cnt" type="number" min="1" max="{{product.prd_cnt}}" *ngIf="product.prd_cnt !='0'"
+              class="form-control form-control-user" [(ngModel)]="productInCart.pcr_cnt"
+              [ngClass]="{'is-invalid': submitted && f.pcr_cnt.errors}" placeholder="Cantidad" pattern="\d+" />
+-->
+          </div>
+          <div class="form-group">
+            <select formControlName="mes" [(ngModel)]="payment.mes" class="form-control" required>
+              <option *ngFor="let item of Mes" [value]="item">{{item}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <select formControlName="anio" [(ngModel)]="payment.anio" class="form-control" required>
+              <option *ngFor="let item of Anio" [value]="item">{{item}}</option>
+            </select>
+          </div>
+
+           <!--
+       <div class="form-group">
+            <label for="disabledTextInput">fecha de Vencimiento</label>
+            <input type="date" formControlName="pgo_fven" id="disabledTextInput" class="form-control" [(ngModel)]="payment.pgo_fven "
+            placeholder="00 - 00" required >
+          </div>-->
+          <div class="form-group">
+            <label for="disabledTextInput">Codigo de seguridad</label>
+            <input type="text" formControlName="pgo_cseg" id="disabledTextInput" class="form-control" [(ngModel)]="payment.pgo_cseg"
+            placeholder="000"  (keypress)="numberOnly($event)"  required >
+          </div>
+          <div class="form-group">
+            <label for="disabledTextInput">Nombre</label>
+            <input type="text" formControlName="pgo_nom" id="disabledTextInput" class="form-control" [(ngModel)]="payment.pgo_nom"
+            placeholder="Tarjeta" required >
+          </div>
+
+
+          <div class="btn-group">
+            <button type="submit" class="btn btn-success">
+                <fa-icon [icon]='faSave'></fa-icon>&nbsp;Guardar
+            </button>
+
+            <button type="reset" (click)="onReset()" class="btn btn-danger">
+                <fa-icon [icon]='faTimes'></fa-icon>&nbsp;Cancelar
+            </button>
+        </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+</section>

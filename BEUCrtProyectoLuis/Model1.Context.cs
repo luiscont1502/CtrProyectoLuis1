@@ -12,6 +12,8 @@ namespace BEUCrtProyectoLuis
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -35,5 +37,33 @@ namespace BEUCrtProyectoLuis
         public virtual DbSet<ProductoEnCarrito> ProductoEnCarrito { get; set; }
         public virtual DbSet<Promocion> Promocion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual ObjectResult<PestadosProductoPorCategoria_Result> PestadosProductoPorCategoria(string estado)
+        {
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PestadosProductoPorCategoria_Result>("PestadosProductoPorCategoria", estadoParameter);
+        }
+    
+        public virtual ObjectResult<PestadosProductoPorPromociones_Result> PestadosProductoPorPromociones(string estado)
+        {
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PestadosProductoPorPromociones_Result>("PestadosProductoPorPromociones", estadoParameter);
+        }
+    
+        public virtual ObjectResult<PventasPorMesesSegunCategoria_Result> PventasPorMesesSegunCategoria()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PventasPorMesesSegunCategoria_Result>("PventasPorMesesSegunCategoria");
+        }
+    
+        public virtual ObjectResult<PventasProductosExistentesPorcategoria_Result> PventasProductosExistentesPorcategoria()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PventasProductosExistentesPorcategoria_Result>("PventasProductosExistentesPorcategoria");
+        }
     }
 }

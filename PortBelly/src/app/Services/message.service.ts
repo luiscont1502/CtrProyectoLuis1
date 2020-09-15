@@ -6,7 +6,7 @@ import {Correo} from '../Models/correo'
   providedIn: 'root'
 })
 export class MessageService {
-  url : string = "https://localhost:44330/api/Correo";
+  url : string = "http://portbelly.azurewebsites.net/api/Correo";
 
   httpOptions={
     headers:new HttpHeaders({

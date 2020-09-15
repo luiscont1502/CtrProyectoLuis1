@@ -25,7 +25,7 @@ namespace WebApiPortBelly.Controllers
                 var httpRequest = HttpContext.Current.Request;
                 //Upload Image
                 HttpPostedFile postedFile = httpRequest.Files["Image"];
-                imageName = SubirImagen(postedFile);
+                imageName = ArchivoBLL.SubirImagen(postedFile);
                 if (imageName != "")
                 {
                     return Content(HttpStatusCode.Created, imageName);
@@ -46,13 +46,15 @@ namespace WebApiPortBelly.Controllers
                 return Content(HttpStatusCode.UnsupportedMediaType, "Error Imagen no soportada");
             }
         }
+      //  [Authorize(Roles = "Administrador,Cliente")]
         public IHttpActionResult GetImage(string name)
         {
             try
             {
                 try
                 {
-                    string filePath = HttpContext.Current.Server.MapPath(@"~/Content/Imagenes/" + name);
+                    string filePath = HttpContext.Current.Server.MapPath(@"~/portbelly/Imagenes/" + name);
+                   // string filePath = HttpContext.Current.Server.MapPath(@"~/Content/Imagenes/" + name);
                     //Compruebo si la imagen existe
                     if (File.Exists(filePath))
                     {
@@ -67,7 +69,7 @@ namespace WebApiPortBelly.Controllers
                     else
                     {
                         //Optengo la imagen de la carpeta
-                        using (Image data = Image.FromFile(HttpContext.Current.Server.MapPath(@"~/Content/Imagenes/default.png")))
+                        using (Image data = Image.FromFile(HttpContext.Current.Server.MapPath(@"~/portbelly/Imagenes/")))
                         {
                             //transformo en bytes para mandar como request
                             byte[] result = (byte[])new ImageConverter().ConvertTo(data, typeof(byte[]));
@@ -87,11 +89,12 @@ namespace WebApiPortBelly.Controllers
 
             }
         }
+//[Authorize(Roles = "Administrador")]
         public IHttpActionResult Delete(string name)
         {
             try
             {
-                EliminarImagen(name);
+                ArchivoBLL.EliminarImagen(name);
                 return Content(HttpStatusCode.OK, "La imagen se eliminó correctamente " + name);
 
             }
@@ -102,7 +105,7 @@ namespace WebApiPortBelly.Controllers
         }
 
 
-        private string SubirImagen(HttpPostedFile postedFile)
+     /*   private string SubirImagen(HttpPostedFile postedFile)
         {
             string imageName = "";
             if (postedFile != null && postedFile.ContentLength > 0)
@@ -125,7 +128,7 @@ namespace WebApiPortBelly.Controllers
                     imageName = "";
                 }
             return imageName;
-        }
+        }*/
        /* private bool EliminarImagen(string imageName)
         {
             string filePath = HttpContext.Current.Server.MapPath("~/Content/Imagenes/" + imageName);
@@ -153,7 +156,7 @@ namespace WebApiPortBelly.Controllers
                 return false;
             }
         }*/
-        private void EliminarImagen(string imageName)
+   /*     private void EliminarImagen(string imageName)
         {
             try
             {
@@ -167,6 +170,6 @@ namespace WebApiPortBelly.Controllers
             catch (Exception)
             {
             }
-        }
+        }*/
     }
 }

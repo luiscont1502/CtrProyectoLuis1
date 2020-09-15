@@ -15,6 +15,7 @@ using System.Web.Http.Cors;
 namespace WebApiPortBelly.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    // [Authorize(Roles = "Cliente")]
     public class ClientesController : ApiController
     {
         public IHttpActionResult Post(Cliente cliente)

@@ -9,6 +9,7 @@
 
 namespace BEUCrtProyectoLuis
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +21,7 @@ namespace BEUCrtProyectoLuis
         public string pcr_est { get; set; }
         public Nullable<int> prd_cnt { get; set; }
         public Nullable<System.DateTime> pcr_dateOfCreated { get; set; }
-    
+        [JsonIgnore]
         public virtual Carrito Carrito { get; set; }
         public virtual Producto Producto { get; set; }
     }

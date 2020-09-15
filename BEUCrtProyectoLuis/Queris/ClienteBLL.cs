@@ -89,5 +89,10 @@ namespace BEUCrtProyectoLuis.Queris
             Entities db = new Entities();
             return db.Cliente.Where(x => x.uso_id.Equals(uso_usu)).ToList();
         }
+        public static Cliente ClienteByUsu(int uso_id) {
+            using (Entities db=new Entities()) {
+                return db.Cliente.FirstOrDefault(x => x.uso_id==uso_id);
+            }
+        }
     }
 }

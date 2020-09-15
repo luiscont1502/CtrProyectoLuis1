@@ -1,6 +1,12 @@
 body{
   overflow-x: hidden;
+  background-color: rgb(217, 219, 221);
+
 }
 .fo{
   text-align: center;
+}
+
+body > header {
+  height: 1px;
 }

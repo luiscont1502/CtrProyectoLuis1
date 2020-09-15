@@ -16,6 +16,7 @@ namespace WebApiPortBelly.Controllers
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ProductoEnCarritosController : ApiController
     {
+        //[Authorize(Roles = "Cliente")]
         public IHttpActionResult Post(ProductoEnCarrito prdCarrito)
         {
             try
@@ -28,7 +29,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+       // [Authorize(Roles = "Administrador, Cliente")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -41,6 +42,8 @@ namespace WebApiPortBelly.Controllers
                 return NotFound();
             }
         }
+
+       // [Authorize(Roles = "Administrador, Cliente")]
         public IHttpActionResult Get()
         {
             try
@@ -53,6 +56,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest();
             }
         }
+        //[Authorize(Roles = "Cliente")]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -65,6 +69,7 @@ namespace WebApiPortBelly.Controllers
                 return Content(HttpStatusCode.BadRequest, ex);
             }
         }
+     //  [Authorize(Roles = "Cliente")]
         public IHttpActionResult Put(ProductoEnCarrito prdCarrito)
         {
             try

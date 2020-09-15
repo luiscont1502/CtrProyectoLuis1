@@ -17,14 +17,18 @@ namespace BEUCrtProyectoLuis.Queris
                     try
                     {
 
-                        a.uso_rol = "Cliente";
+                        //a.uso_rol = "Cliente";
+                        db.Usuario.Add(a);
                         db.Usuario.Add(a);
                         db.SaveChanges();
                         transaction.Commit();
-                        Usuario u = GetUsuarioByUsu(a.uso_usu);
-                        Cliente c = new Cliente();
-                        c.uso_id = u.uso_id;
-                        ClienteBLL.Create(c);
+                        Usuario u = GetUsuarioByMail(a.uso_cor);
+                        if (u != null)
+                        {
+                            Cliente c = new Cliente();
+                            c.uso_id = u.uso_id;
+                            ClienteBLL.Create(c);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -102,6 +106,59 @@ namespace BEUCrtProyectoLuis.Queris
         {
             Entities db = new Entities();
             return db.Usuario.FirstOrDefault(x => x.uso_usu == usu);
+        }
+        public static Usuario LoginByMail(string cor, string pass)
+        {
+            using (Entities db = new Entities())
+            {
+                Usuario usu = db.Usuario.FirstOrDefault(x => x.uso_cor == cor);
+                if (usu != null)
+                {
+                    if (usu.uso_con == pass)
+                    {
+                        return usu;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public static Usuario LoginByUsu(string usuario, string pass)
+        {
+            using (Entities db = new Entities())
+            {
+                Usuario usu = db.Usuario.FirstOrDefault(x => x.uso_usu == usuario);
+                if (usu != null)
+                {
+                    if (usu.uso_con == pass)
+                    {
+                        return usu;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+    
+
+        public static Usuario GetUsuarioByMail(string cor)
+        {
+            using (Entities db = new Entities())
+            {
+                return db.Usuario.FirstOrDefault(x => x.uso_cor == cor);
+            }
         }
 
 

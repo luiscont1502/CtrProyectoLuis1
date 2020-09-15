@@ -8,7 +8,7 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-url:string="https://localhost:44330/api/Usuarios";
+url:string="http://portbelly.azurewebsites.net/api/Usuarios";
 httpOptions={
   headers:new HttpHeaders({
     'Content-Type': 'application/json',

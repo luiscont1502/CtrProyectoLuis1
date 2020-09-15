@@ -1,0 +1,49 @@
+<section>
+<div>
+  <div class="text-center">
+      <fa-icon class="fa-2x" [icon]="faListAlt"></fa-icon>
+  </div>
+  <hr>
+  <h5>Listado de Categorias</h5>
+  <table class="table table-hover">
+      <thead class="thead-dark">
+          <tr>
+              <th>
+                  Nombre
+              </th>
+              <th>
+                  N°
+              </th>
+              <th>
+                Codigo Seg
+            </th>
+            <th>
+              Fecha de Ven
+          </th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of payment; let i = index">
+              <td>
+                  {{item.pgo_nom}}
+              </td>
+              <td>
+                  {{item.pgo_ntg}}
+              </td>
+              <td>
+                {{item.pgo_cseg}}
+            </td>
+            <td>
+              {{item.pgo_fven | date:"MM/yy"}}
+          </td>
+              <td class="btn-group">
+                <button (click)="update(item)" class="btn btn-sm btn-warning"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+                    <button (click)="delete(item)" class="btn btn-sm btn-danger"><fa-icon [icon]="faTrash"></fa-icon></button>
+                  </td>
+          </tr>
+
+      </tbody>
+  </table>
+</div>
+</section>

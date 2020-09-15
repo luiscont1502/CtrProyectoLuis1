@@ -14,9 +14,12 @@ using System.Web.Http.Cors;
 
 namespace WebApiPortBelly.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    //[EnableCorsAttribute("http://localhost:4200", "*", "*")]
+   [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+   
     public class CategoriasController : ApiController
     {
+        //[Authorize(Roles = "Administrador")]
         public IHttpActionResult Post(Categoria categoria)
         {
             try
@@ -29,7 +32,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+       // [Authorize(Roles = "Administrador,Cliente")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -42,6 +45,7 @@ namespace WebApiPortBelly.Controllers
                 return NotFound();
             }
         }
+       // [Authorize(Roles = "Administrador,Cliente")]
         public IHttpActionResult Get()
         {
             try
@@ -54,6 +58,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest();
             }
         }
+        //[Authorize(Roles = "Administrador")]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -66,19 +71,20 @@ namespace WebApiPortBelly.Controllers
                 return Content(HttpStatusCode.BadRequest, ex);
             }
         }
-       /* public IHttpActionResult Put(Categoria categoria)
-        {
-            try
-            {
-                CategoriaBLL.Update(categoria);
+        /* public IHttpActionResult Put(Categoria categoria)
+         {
+             try
+             {
+                 CategoriaBLL.Update(categoria);
 
-                return Content(HttpStatusCode.OK, "Categoria actualizado correctamente");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message + categoria.ToString());
-            }
-        }*/
+                 return Content(HttpStatusCode.OK, "Categoria actualizado correctamente");
+             }
+             catch (Exception ex)
+             {
+                 return BadRequest(ex.Message + categoria.ToString());
+             }
+         }*/
+      //  [Authorize(Roles = "Administrador")]
         public IHttpActionResult Put(Categoria categoria)
         {
             try

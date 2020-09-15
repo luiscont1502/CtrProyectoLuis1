@@ -38,10 +38,30 @@ import { UsersCreateComponent } from './users-main/users-create/users-create.com
 import { ContactanosMainComponent } from './contactanos-main/contactanos-main.component';
 //google maps de angular
 import { GoogleMapsModule} from '@angular/google-maps';
+import { DatePipe } from '@angular/common';
 //message
 import { MessageService } from './services/message.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserMainComponent } from './user-main/user-main.component';
+import { UserSignInMainComponent } from './user-main/user-sign-in-main/user-sign-in-main.component';
+import { UserSignUpMainComponent } from './user-main/user-sign-up-main/user-sign-up-main.component';
+import { UserSignInFormComponent } from './user-main/user-sign-in-main/user-sign-in-form/user-sign-in-form.component';
+import { UserSignUpFormComponent } from './user-main/user-sign-up-main/user-sign-up-form/user-sign-up-form.component';
+import { PaymentMainComponent } from './payment-main/payment-main.component';
+import { PaymentFormComponent } from './payment-main/payment-form/payment-form.component';
+import { PaymentListComponent } from './payment-main/payment-list/payment-list.component';
+import { TipoFechaPipe } from './shared/tipo-fecha.pipe';
+import { ReportMainComponent } from './report-main/report-main.component';
+import { ProductsEditComponent } from './products-main/products-edit/products-edit.component';
+
+import {NgxStripeModule} from 'ngx-stripe';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { ClienteMainComponent } from './cliente-main/cliente-main.component';
+import { PieChartComponent } from './report-main/pie-chart/pie-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { ReportDetailsComponent } from './report-main/report-details/report-details.component';
+import { BarChartComponent } from './report-main/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +89,23 @@ import { FooterComponent } from './footer/footer.component';
     ContactanosMainComponent,
     InicioComponent,
     FooterComponent,
+    UserMainComponent,
+    UserSignInMainComponent,
+    UserSignUpMainComponent,
+    UserSignInFormComponent,
+    UserSignUpFormComponent,
+    PaymentMainComponent,
+    PaymentFormComponent,
+    PaymentListComponent,
+    TipoFechaPipe,
+    ReportMainComponent,
+    ProductsEditComponent,
+    ClienteMainComponent,
+    PieChartComponent,
+    ReportDetailsComponent,
+    BarChartComponent,
+
+
 
   ],
   imports: [
@@ -79,13 +116,18 @@ import { FooterComponent } from './footer/footer.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ChartsModule,
+    NgxFileDropModule,
+    NgxStripeModule.forRoot('pk_test_51HOS6pLhIET9gHWLGJdFB5a8UfCdZknGfi7HgfieaXSznHII8HMGHm4jngswuBvmEFU5SCt9LXH2dBUYpRfxjCkT00z0d52cND'),
   ],
   providers: [
+    DatePipe,
     ProductService, {
       provide: HTTP_INTERCEPTORS,
       useClass: ServiceInterceptor,
-      multi: true
+      multi: true,
+
     },MessageService,
     {
       provide: LOCALE_ID,

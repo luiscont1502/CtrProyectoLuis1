@@ -9,14 +9,16 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using System.Data.Entity;
+
 using System.Web.Http.Cors;
 
 namespace WebApiPortBelly.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+   
     public class PromocionController : ApiController
     {
+//[Authorize(Roles = "Administrador")]
         public IHttpActionResult Post(Promocion promocion)
         {
             try
@@ -29,7 +31,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+      //  [Authorize(Roles = "Administrador,Cliente")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -42,6 +44,7 @@ namespace WebApiPortBelly.Controllers
                 return NotFound();
             }
         }
+       // [Authorize(Roles = "Administrador")]
         public IHttpActionResult Get()
         {
             try
@@ -54,6 +57,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest();
             }
         }
+      //  [Authorize(Roles = "Administrador")]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -66,7 +70,7 @@ namespace WebApiPortBelly.Controllers
                 return Content(HttpStatusCode.BadRequest, ex);
             }
         }
-
+       // [Authorize(Roles = "Administrador")]
         public IHttpActionResult Put(Promocion promocion)
         {
             try

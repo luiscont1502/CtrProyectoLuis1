@@ -1,5 +1,32 @@
+<header >
+<div class="header headerc " ><!--header_top-->
+  <div class="container-fluid ">
+    <div class="row ">
+      <div class="col-6 col-sm-6 mt-3">
+        <div class="contactinfo">
+          <ul class="nav nav-pills">
+            <li><a  class="mx-3" href="#"><fa-icon [icon]="faPhone"></fa-icon> +2 95 01 88 821</a></li>
+            <li><a href="#" class="mx-3"><fa-icon [icon]="faEnvelope"></fa-icon> info@domain.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6 col-sm-6 mt-3">
+        <div class="contactinfo">
+          <ul class="nav d-flex justify-content-end mr-5">
+            <li ><a href="#"  class="mx-3"> <fa-icon [icon]="faFacebook" class="fa-lg"></fa-icon></a></li>
+            <li ><a href="#"  class="mx-3 "><fa-icon [icon]="faTwitter" class="fa-lg"></fa-icon></a></li>
+            <li><a href="#"  class="mx-3 "><fa-icon [icon]="faLinkedin" class="fa-lg"></fa-icon></a></li>
+            <li><a href="#"  class="mx-3 "><fa-icon [icon]="faWhatsapp" class="fa-lg"></fa-icon></a></li> </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!--/header_top-->
+
+</header>
 <!-- Toolbar -->
-<nav class="navbar navbar-expand-lg headerc ">
+<nav class="navbar navbar-expand-lg headerc navbar " *ngIf="nombre" >
   <a class="navbar-brand  text-white" routerLink="/">PortBelly</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,21 +36,30 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/tienda">Tienda</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/">Inicio</a></li>
-      <li class="nav-item"><a class="nav-link  text-white" routerLink="/productos">Productos</a></li>
+      <li class="nav-item"><a class="nav-link  text-white" routerLink="/productos" *ngIf='isAdmin'>Productos</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/categorias">Categorias</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/promociones">Promociones</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/carritopersonal">Carrito Personal</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/usuario">Usuario</a></li>
       <li class="nav-item"><a class="nav-link  text-white" routerLink="/contactos">contactos</a></li>
+      <li class="nav-item"><a class="nav-link  text-white" routerLink="/pagos">pagos</a></li>
+      <li class="nav-item"><a class="nav-link  text-white" routerLink="/cliente">Cliente</a></li>
+      <li class="nav-item"><a class="nav-link  text-white" routerLink="/reporte">Reporte</a></li>
     </ul>
     <span class="navbar-text  text-white">
-      Compra todo lo que quieras
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link " routerLink="/login" > <fa-icon [icon]="faLock"></fa-icon> Ingreso</a></li>
+        <li class="nav-item"><a class="nav-link " routerLink="/login" > <fa-icon [icon]="faShoppingCart"></fa-icon> Ingreso</a></li>
+        <li class="nav-item"><a class="nav-link " routerLink="/login" > <fa-icon [icon]="faUser"></fa-icon> Ingreso</a></li>
+
+
+      </ul>
     </span>
   </div>
 </nav>
-<div class="container-flex">
-  <router-outlet></router-outlet>
-  <app-inicio></app-inicio>
-</div>
 
- <app-footer></app-footer>
+<div class="container-flex">
+
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

@@ -7,12 +7,15 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  url : string = "https://localhost:44330/api/Producto";
 
-  httpOptions={
-    headers:new HttpHeaders({
+ //url : string = "https://localhost:44330/api/Productos";
+ url : string = "http://portbelly.azurewebsites.net/api/Productos";
+
+  httpOptions = {
+    headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+     //'Authorization': 'Bearer ' + localStorage.getItem('token'),
     })
   };
   constructor(private http:HttpClient) { }

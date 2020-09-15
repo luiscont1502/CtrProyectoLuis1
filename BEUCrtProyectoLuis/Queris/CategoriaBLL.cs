@@ -30,8 +30,10 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static Categoria Get(int? id)
         {
-            Entities db = new Entities();
-            return db.Categoria.Find(id);
+            using (Entities db=new Entities()) { 
+             return db.Categoria.Find(id);
+            }
+               
         }
      
         public static void Update(Categoria categoria)
@@ -63,8 +65,8 @@ namespace BEUCrtProyectoLuis.Queris
                 {
                     try
                     {
-                        Categoria Categoria = db.Categoria.Find(id);
-                        db.Entry(Categoria).State = System.Data.Entity.EntityState.Deleted;
+                        Categoria categoria = db.Categoria.Find(id);
+                        db.Entry(categoria).State = System.Data.Entity.EntityState.Deleted;
                         db.SaveChanges();
                         transaction.Commit();
                     }
@@ -79,8 +81,10 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static List<Categoria> List()
         {
-            Entities db = new Entities();
-            return db.Categoria.ToList();
+            using (Entities db=new Entities()) {
+                return db.Categoria.ToList();
+            }
+              
         }
         public static bool Updates(Categoria p)
         {

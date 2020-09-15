@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BEUCrtProyectoLuis.Queris
 {
@@ -79,13 +80,46 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static List<Carrito> List()
         {
-            Entities db = new Entities();
-            return db.Carrito.Include(c => c.Cliente).ToList();
+            using (Entities db = new Entities()) {
+                return db.Carrito.Include(c => c.Cliente).ToList();
+            }
+   
         }
         public static List<Carrito> List(int cln_id)
         {
-            Entities db = new Entities();
-            return db.Carrito.Where(x => x.cln_id.Equals(cln_id)).ToList();
+            using (Entities db= new Entities()) {
+                return db.Carrito.Where(x => x.cln_id.Equals(cln_id)).ToList();
+            }
+              
         }
+
+        public static Carrito ObtenerCarritoPendiente(int cln_id) {
+            using ( Entities db= new Entities()) {
+                Carrito carrito = db.Carrito.FirstOrDefault(x=> x.cln_id.Equals(cln_id) && x.car_tipo.Equals("Pendiente"));
+                if (carrito != null)
+                {
+                    return carrito;
+                }
+                else {
+                    carrito = new Carrito();
+                    carrito.cln_id = cln_id;
+                    carrito.car_tipo = "Pendiente";
+                    Create(carrito);
+                    return carrito;
+                }
+            }
+        
+        }
+        public static List<Carrito> ObtenerCarritosPagados(int cln_id)
+        {
+            using (Entities db= new Entities()) {
+                return db.Carrito.Where(x => x.cln_id.Equals(cln_id) && x.car_tipo.Equals("Pagado")).ToList();
+            }
+
+        }
+
+
+
+
     }
 }

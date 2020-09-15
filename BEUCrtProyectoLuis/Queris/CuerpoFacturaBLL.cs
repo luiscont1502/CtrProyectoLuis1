@@ -17,7 +17,7 @@ namespace BEUCrtProyectoLuis.Queris
                 {
                     try
                     {
-
+                        a.crf_dateOfCreated = DateTime.Now;
                         db.CuerpoFactura.Add(a);
                         db.SaveChanges();
                         transaction.Commit();
@@ -32,8 +32,10 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static CuerpoFactura Get(int? id)
         {
-            Entities db = new Entities();
-            return db.CuerpoFactura.Find(id);
+            using (Entities db= new Entities()) {
+                return db.CuerpoFactura.Find(id);
+            }
+             
         }
         public static void Update(CuerpoFactura cuerpoFactura)
         {
@@ -80,8 +82,10 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static List<CuerpoFactura> List()
         {
-            Entities db = new Entities();
-            return db.CuerpoFactura.Include(c => c.CabezaFactura).ToList();
+            using (Entities db= new Entities()) {
+                return db.CuerpoFactura.Include(c => c.CabezaFactura).Include(c=>c.Carrito).ToList();
+            }
+               
         }
     }
 }

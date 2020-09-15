@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Router } from '@angular/router';
 import {
   HttpRequest,
   HttpHandler,
@@ -13,10 +13,10 @@ import Swal from 'sweetalert2';
 @Injectable()
 export class ServiceInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, response: HttpHandler): Observable<HttpEvent<unknown>> {
-    return response.handle(request).do(next => {
+    return response.handle(request).do((next) => {
       if (next instanceof HttpResponse){
         console.info(next);
         switch(next.status){
@@ -47,6 +47,23 @@ export class ServiceInterceptor implements HttpInterceptor {
             icon : "error"
           });
           break;
+          case 401:
+            Swal.fire({
+              title: 'Acceso Denegado',
+              text:
+                'No esta autorizado para realizar esta petición' +
+                error.error.Message,
+              icon: 'error',
+            });
+            this.router.navigateByUrl('/login');
+            break;
+            case 409:
+              Swal.fire({
+                title: 'Error',
+                text: error.error.Message,
+                icon: 'error',
+              });
+              break;
           case 500:
           Swal.fire({
             title: 'Error',

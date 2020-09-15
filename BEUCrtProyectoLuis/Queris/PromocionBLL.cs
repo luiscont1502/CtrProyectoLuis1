@@ -56,6 +56,34 @@ namespace BEUCrtProyectoLuis.Queris
                 }
             }
         }
+        public static bool Updates(Promocion p)
+        {
+            using (Entities db = new Entities())
+            {
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Promocion prm = new Promocion();
+                        var order = db.Promocion.AsNoTracking().Where(s => s.prm_id == p.prm_id).FirstOrDefault();
+                        prm.prm_id = order.prm_id;
+                        prm.prm_nom = p.prm_nom;
+                        prm.prm_tip = p.prm_tip;
+                        prm.prm_can = p.prm_can;
+                        prm.prm_por = p.prm_por;
+                        db.Entry(prm).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
         public static void Delete(int? id)
         {
             using (Entities db = new Entities())

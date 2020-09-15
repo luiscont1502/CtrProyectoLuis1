@@ -18,7 +18,7 @@ namespace BEUCrtProyectoLuis.Queris
                     try
                     {
 
-
+                        
                         db.Pago.Add(a);
                         db.SaveChanges();
                         transaction.Commit();
@@ -33,8 +33,10 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static Pago Get(int? id)
         {
-            Entities db = new Entities();
-            return db.Pago.Find(id);
+            using (Entities db= new Entities()) {
+                return db.Pago.Find(id);
+            }
+                
         }
         public static void Update(Pago Pago)
         {
@@ -81,13 +83,22 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static List<Pago> List()
         {
-            Entities db = new Entities();
-            return db.Pago.Include(c => c.Cliente).ToList();
+            using (Entities db= new Entities()) {
+                return db.Pago.Include(c => c.Cliente).ToList();
+            }
+          
         }
         public static List<Pago> List(int id)
         {
-            Entities db = new Entities();
-            return db.Pago.Where(x => x.cln_id.Equals(id)).ToList();
+            using (Entities db = new Entities()) {
+                return db.Pago.Where(x => x.cln_id.Equals(id)).ToList();
+            }
+             
+        }
+        public static Pago GetPagoPrincipal(int cln_id) {
+            using (Entities db= new Entities()) {
+                return db.Pago.FirstOrDefault(x => x.cln_id.Equals(cln_id));
+            }
         }
     }
 }

@@ -9,11 +9,12 @@ import { ProductInCart } from '../models/Product-in-cart';
 })
 export class ProductInCartService {
 
-  url : string = "  https://localhost:44330/api/ProductoEnCarritos";
-  httpOptions={
-    headers:new HttpHeaders({
+  url : string = "http://portbelly.azurewebsites.net/api/ProductoEnCarritos";
+  httpOptions = {
+    headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+     // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
     })
   };
   constructor(private http:HttpClient) { }

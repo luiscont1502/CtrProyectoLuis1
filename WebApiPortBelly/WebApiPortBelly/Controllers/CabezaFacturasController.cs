@@ -14,6 +14,7 @@ using System.Web.Http.Cors;
 
 namespace WebApiPortBelly.Controllers
 {
+   // [RoutePrefix("api/CabezaFacturas")]
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CabezaFacturasController : ApiController
     {
@@ -29,7 +30,7 @@ namespace WebApiPortBelly.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+       // [Authorize(Roles = "Cliente")]
         public IHttpActionResult Get(int id)
         {
             try

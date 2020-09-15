@@ -14,6 +14,7 @@ h5,
 h6 {
     margin: 8px 0;
 }
+
 p {
     margin: 0;
 }
@@ -39,10 +40,25 @@ svg.material-icons {
     height: 24px;
     width: auto;
 }
+/* --- Clase que agregaremos cuando el usuario haga scroll --- */
+.menu-fixed {
+	position:fixed;
+	z-index:1000;
+	top:0;
+	max-width:1000px;
+	width:100%;
+	box-shadow:0px 4px 3px rgba(0,0,0,.5);
+}
+.aspacin{
+ padding-left: 20px;
+}
+.aspacinIcon{
+  padding-right: 20px;
+}
 a,
 a:visited,
 a:hover {
-    color: #333;
+    color: white;
     text-decoration: none;
 }
 a:hover {
@@ -50,11 +66,11 @@ a:hover {
 }
 .circle-link:hover {
     transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 15px rgba(245, 241, 241, 0.8);
 }
 footer {
     margin-bottom: 0px;
-    background:#615B55;
+    background:#856f58;
     height: 200px;
     line-height: 20px;
 }
@@ -70,7 +86,9 @@ footer a {
   height: 32px;
   width: 32px;
 }
-
+.navbar-toggler-icon{
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
 
 
 

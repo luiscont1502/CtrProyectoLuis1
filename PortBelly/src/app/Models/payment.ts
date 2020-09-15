@@ -3,4 +3,8 @@ export class Payment {
   cln_id:number;
   pgo_nom:string;
   pgo_ntg:string;
+  pgo_fven:string;
+  pgo_cseg:number;
+  mes:number;
+  anio:number;
 }

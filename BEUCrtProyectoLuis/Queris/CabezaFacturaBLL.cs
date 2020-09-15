@@ -78,13 +78,34 @@ namespace BEUCrtProyectoLuis.Queris
         }
         public static List<CabezaFactura> List()
         {
-            Entities db = new Entities();
-            return db.CabezaFactura.Include(c => c.Cliente).ToList();
+            using (Entities db=new Entities()) {
+                return db.CabezaFactura.Include(c => c.Cliente).ToList();
+            }  
         }
         public static List<CabezaFactura> List(int cln_id)
         {
-            Entities db = new Entities();
-            return db.CabezaFactura.Where(x => x.cln_id.Equals(cln_id)).ToList();
+            using (Entities db=new Entities()) {
+                return db.CabezaFactura.Where(x => x.cln_id.Equals(cln_id)).ToList();
+            }
+                
+        }
+        public static CabezaFactura GetCabFactByCli(int cln_id) {
+
+            using (Entities db=new Entities()) {
+                CabezaFactura cabezafactura = db.CabezaFactura.FirstOrDefault(x=> x.cln_id== cln_id);
+                if (cabezafactura != null)
+                {
+                    return db.CabezaFactura.FirstOrDefault(x => x.cln_id == cln_id);
+                }
+                else {
+                    cabezafactura = new CabezaFactura();
+                    cabezafactura.cln_id = cln_id;
+                    Create(cabezafactura);
+                    return cabezafactura;
+                }
+            }
+
+
         }
 
 

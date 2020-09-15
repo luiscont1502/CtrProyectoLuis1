@@ -67,5 +67,47 @@ namespace BEUCrtProyectoLuis.Queris
                 throw;
             }
         }
+        public static string SubirImagen(HttpPostedFile postedFile)
+        {
+            string imageName = "";
+            if (postedFile != null && postedFile.ContentLength > 0)
+                try
+                {
+                    ArchivoBLL archivoBLL = new ArchivoBLL();
+
+                    //Create custom fileName
+                    imageName = new string(Path.GetFileNameWithoutExtension(postedFile.FileName).Take(10).ToArray()).Replace(" ", "-");
+                    imageName = imageName + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(postedFile.FileName);
+                  
+                    var filePath = HttpContext.Current.Server.MapPath("~/portbelly/Imagenes/" + imageName);
+                    //var filePath = HttpContext.Current.Server.MapPath("~/Content/Imagenes/" + imageName);
+                    if (!archivoBLL.ComprobarRuta(filePath))
+                    {
+                        archivoBLL.SubirArchivo(filePath, postedFile);
+                    }
+                    //postedFile.SaveAs(filePath);
+                }
+                catch (Exception)
+                {
+                    imageName = "";
+                }
+            return imageName;
+        }
+        public static void EliminarImagen(string imageName)
+        {
+            try
+            {
+                string filePath = HttpContext.Current.Server.MapPath(@"~/Content/Imagenes/" + imageName);
+               //string filePath = HttpContext.Current.Server.MapPath(@"~/Content/Imagenes/" + imageName);
+                ArchivoBLL archivoBLL = new ArchivoBLL();
+                if (archivoBLL.ComprobarRuta(filePath))
+                {
+                    archivoBLL.EliminarArchivo(filePath);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

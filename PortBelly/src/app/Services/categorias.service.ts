@@ -8,13 +8,15 @@ import swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class CategoriasService {
-  url : string = "https://localhost:44330/api/Categorias";
-  httpOptions={
-    headers:new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    })
-  };
+  //url : string = "https://localhost:44330/api/Categorias";
+ url : string = "http://portbelly.azurewebsites.net/api/Categorias";
+ httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+   // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
+  })
+};
 
   constructor(private http:HttpClient) {  }
   create(categorias:Categoria) : Observable<any> {

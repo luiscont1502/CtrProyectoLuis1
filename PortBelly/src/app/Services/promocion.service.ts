@@ -7,12 +7,14 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PromocionService {
-  url = 'https://localhost:44330/api/Promocion';
+  //url : string = "https://localhost:44330/api/Promocion";
+  url = 'http://portbelly.azurewebsites.net/api/Promocion';
 
-  httpOptions = {
+httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+     // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
     })
   };
   constructor(private http: HttpClient) { }

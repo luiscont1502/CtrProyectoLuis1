@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CabezaFactura">
           <Key>
             <PropertyRef Name="cbf_id" />
@@ -44,6 +44,7 @@
           <Property Name="crf_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cbf_id" Type="int" Nullable="false" />
           <Property Name="car_id" Type="int" Nullable="false" />
+          <Property Name="crf_dateOfCreated" Type="datetime" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -53,7 +54,7 @@
           <Property Name="cln_id" Type="int" Nullable="false" />
           <Property Name="pgo_nom" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="pgo_ntg" Type="nchar" MaxLength="16" Nullable="false" />
-          <Property Name="pgo_fven" Type="smalldatetime" Nullable="false" />
+          <Property Name="pgo_fven" Type="date" Nullable="false" />
           <Property Name="pgo_cseg" Type="int" />
         </EntityType>
         <EntityType Name="Producto">
@@ -97,13 +98,13 @@
             <PropertyRef Name="uso_id" />
           </Key>
           <Property Name="uso_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="uso_usu" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="uso_con" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="uso_rol" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="uso_usu" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="uso_con" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="uso_rol" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="uso_nom" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="uso_cor" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CabezaFac__cln_i__398D8EEE">
+        <Association Name="FK__CabezaFac__cln_i__73BA3083">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -117,7 +118,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Carrito__cln_id__3A81B327">
+        <Association Name="FK__Carrito__cln_id__74AE54BC">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -145,7 +146,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CuerpoFac__car_i__3C69FB99">
+        <Association Name="FK__CuerpoFac__car_i__76969D2E">
           <End Role="Carrito" Type="Self.Carrito" Multiplicity="1" />
           <End Role="CuerpoFactura" Type="Self.CuerpoFactura" Multiplicity="*" />
           <ReferentialConstraint>
@@ -157,7 +158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CuerpoFac__cbf_i__3D5E1FD2">
+        <Association Name="FK__CuerpoFac__cbf_i__778AC167">
           <End Role="CabezaFactura" Type="Self.CabezaFactura" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -185,7 +186,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Producto__cat_id__3F466844">
+        <Association Name="FK__Producto__cat_id__797309D9">
           <End Role="Categoria" Type="Self.Categoria" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -199,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Producto__prm_id__403A8C7D">
+        <Association Name="FK__Producto__prm_id__7A672E12">
           <End Role="Promocion" Type="Self.Promocion" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -213,7 +214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductoE__car_i__412EB0B6">
+        <Association Name="FK__ProductoE__car_i__7B5B524B">
           <End Role="Carrito" Type="Self.Carrito" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -227,7 +228,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductoE__prd_i__4222D4EF">
+        <Association Name="FK__ProductoE__prd_i__7C4F7684">
           <End Role="Producto" Type="Self.Producto" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -241,6 +242,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PestadosProductoPorCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PestadosProductoPorPromociones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PventasPorMesesSegunCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PventasProductosExistentesPorcategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="CabezaFactura" EntityType="Self.CabezaFactura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carrito" EntityType="Self.Carrito" Schema="dbo" store:Type="Tables" />
@@ -252,11 +261,11 @@
           <EntitySet Name="ProductoEnCarrito" EntityType="Self.ProductoEnCarrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promocion" EntityType="Self.Promocion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CabezaFac__cln_i__398D8EEE" Association="Self.FK__CabezaFac__cln_i__398D8EEE">
+          <AssociationSet Name="FK__CabezaFac__cln_i__73BA3083" Association="Self.FK__CabezaFac__cln_i__73BA3083">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="CabezaFactura" EntitySet="CabezaFactura" />
           </AssociationSet>
-          <AssociationSet Name="FK__Carrito__cln_id__3A81B327" Association="Self.FK__Carrito__cln_id__3A81B327">
+          <AssociationSet Name="FK__Carrito__cln_id__74AE54BC" Association="Self.FK__Carrito__cln_id__74AE54BC">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Carrito" EntitySet="Carrito" />
           </AssociationSet>
@@ -264,11 +273,11 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK__CuerpoFac__car_i__3C69FB99" Association="Self.FK__CuerpoFac__car_i__3C69FB99">
+          <AssociationSet Name="FK__CuerpoFac__car_i__76969D2E" Association="Self.FK__CuerpoFac__car_i__76969D2E">
             <End Role="Carrito" EntitySet="Carrito" />
             <End Role="CuerpoFactura" EntitySet="CuerpoFactura" />
           </AssociationSet>
-          <AssociationSet Name="FK__CuerpoFac__cbf_i__3D5E1FD2" Association="Self.FK__CuerpoFac__cbf_i__3D5E1FD2">
+          <AssociationSet Name="FK__CuerpoFac__cbf_i__778AC167" Association="Self.FK__CuerpoFac__cbf_i__778AC167">
             <End Role="CabezaFactura" EntitySet="CabezaFactura" />
             <End Role="CuerpoFactura" EntitySet="CuerpoFactura" />
           </AssociationSet>
@@ -276,25 +285,24 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <AssociationSet Name="FK__Producto__cat_id__3F466844" Association="Self.FK__Producto__cat_id__3F466844">
+          <AssociationSet Name="FK__Producto__cat_id__797309D9" Association="Self.FK__Producto__cat_id__797309D9">
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__Producto__prm_id__403A8C7D" Association="Self.FK__Producto__prm_id__403A8C7D">
+          <AssociationSet Name="FK__Producto__prm_id__7A672E12" Association="Self.FK__Producto__prm_id__7A672E12">
             <End Role="Promocion" EntitySet="Promocion" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductoE__car_i__412EB0B6" Association="Self.FK__ProductoE__car_i__412EB0B6">
+          <AssociationSet Name="FK__ProductoE__car_i__7B5B524B" Association="Self.FK__ProductoE__car_i__7B5B524B">
             <End Role="Carrito" EntitySet="Carrito" />
             <End Role="ProductoEnCarrito" EntitySet="ProductoEnCarrito" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductoE__prd_i__4222D4EF" Association="Self.FK__ProductoE__prd_i__4222D4EF">
+          <AssociationSet Name="FK__ProductoE__prd_i__7C4F7684" Association="Self.FK__ProductoE__prd_i__7C4F7684">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="ProductoEnCarrito" EntitySet="ProductoEnCarrito" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -349,6 +357,7 @@
           <Property Name="car_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CabezaFactura" Relationship="Self.FK__CuerpoFac__cbf_i__3D5E1FD2" FromRole="CuerpoFactura" ToRole="CabezaFactura" />
           <NavigationProperty Name="Carrito" Relationship="Self.FK__CuerpoFac__car_i__3C69FB99" FromRole="CuerpoFactura" ToRole="Carrito" />
+          <Property Name="crf_dateOfCreated" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -409,9 +418,9 @@
             <PropertyRef Name="uso_id" />
           </Key>
           <Property Name="uso_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uso_usu" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="uso_con" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="uso_rol" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="uso_usu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uso_con" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uso_rol" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uso_nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uso_cor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente__uso_id__3B75D760" FromRole="Usuario" ToRole="Cliente" />
@@ -605,7 +614,32 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="ProductoEnCarrito" EntitySet="ProductoEnCarrito" />
           </AssociationSet>
+          <FunctionImport Name="PestadosProductoPorCategoria" ReturnType="Collection(Model.PestadosProductoPorCategoria_Result)">
+          <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PestadosProductoPorPromociones" ReturnType="Collection(Model.PestadosProductoPorPromociones_Result)">
+          <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PventasPorMesesSegunCategoria" ReturnType="Collection(Model.PventasPorMesesSegunCategoria_Result)" />
+          <FunctionImport Name="PventasProductosExistentesPorcategoria" ReturnType="Collection(Model.PventasProductosExistentesPorcategoria_Result)" />
         </EntityContainer>
+        <ComplexType Name="PestadosProductoPorCategoria_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PestadosProductoPorPromociones_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Productos" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PventasPorMesesSegunCategoria_Result">
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="String" Name="Categoria" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PventasProductosExistentesPorcategoria_Result">
+          <Property Type="String" Name="cat_nom" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -651,6 +685,7 @@
           <EntitySetMapping Name="CuerpoFactura">
             <EntityTypeMapping TypeName="Model.CuerpoFactura">
               <MappingFragment StoreEntitySet="CuerpoFactura">
+                <ScalarProperty Name="crf_dateOfCreated" ColumnName="crf_dateOfCreated" />
                 <ScalarProperty Name="crf_id" ColumnName="crf_id" />
                 <ScalarProperty Name="cbf_id" ColumnName="cbf_id" />
                 <ScalarProperty Name="car_id" ColumnName="car_id" />
@@ -720,6 +755,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PestadosProductoPorCategoria" FunctionName="Model.Store.PestadosProductoPorCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.PestadosProductoPorCategoria_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PestadosProductoPorPromociones" FunctionName="Model.Store.PestadosProductoPorPromociones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.PestadosProductoPorPromociones_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Productos" ColumnName="Productos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PventasPorMesesSegunCategoria" FunctionName="Model.Store.PventasPorMesesSegunCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.PventasPorMesesSegunCategoria_Result">
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PventasProductosExistentesPorcategoria" FunctionName="Model.Store.PventasProductosExistentesPorcategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.PventasProductosExistentesPorcategoria_Result">
+                <ScalarProperty Name="cat_nom" ColumnName="cat_nom" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
